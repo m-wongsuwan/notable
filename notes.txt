@@ -1,0 +1,6 @@
+querying database items
+say, for finding a chat involving a user where the user id is in an array
+https://www.mongodb.com/docs/manual/tutorial/query-arrays/
+
+adding to db array
+https://stackoverflow.com/questions/33049707/push-items-into-mongo-array-via-mongoose
