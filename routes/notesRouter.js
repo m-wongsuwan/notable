@@ -12,7 +12,7 @@ notesRouter.post('/addnote/:userId', (req, res, next) => {
                 return next(err)
             }
             if(user) {
-                // updates note reciever array "likedBy" with liker id
+                // updates note receiver array "likedBy" with liker id
                 User.updateOne(
                     { _id: req.params.userId },
                     { $addToSet: { likedBy: req.auth._id } },

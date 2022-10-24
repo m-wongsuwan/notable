@@ -2,6 +2,20 @@ const express = require('express')
 const chatRouter = express.Router()
 const Chat = require('../models/Chat')
 
+// get chats involving user
+chatRouter.get('/getchats', (req, res, next) => {
+    Chat.find(
+        { users: req.auth._id },
+        (err, chats) => {
+            if(err) {
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(chats)
+        }
+    )
+})
+
 //initiate chat
 chatRouter.post('/startchat/:userId', (req, res, next) => {
     Chat.findOne(

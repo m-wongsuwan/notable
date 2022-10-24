@@ -9,8 +9,54 @@ usersRouter.get('/', (req, res, next) => {
             res.status(500)
             return next(err)
         }
-        return res.status(200).send(users)
+        const usersWithoutPassword = users.map(user => user.withoutPassword())
+        return res.status(200).send(usersWithoutPassword)
     })
+})
+
+// get single user
+usersRouter.get('/:userId', (req, res, next) => {
+    User.findOne(
+        { _id: req.params.userId },
+        (err, user) => {
+            if(err) {
+                res.status(500)
+                return next(err)
+            }
+            if(!user) {
+                res.status(403)
+                return next(new Error('User does not exist!'))
+            }
+            return res.status(200).send(user.withoutPassword())
+        }
+    )
+})
+
+// update profile
+usersRouter.put('/updateprofile/:userId', (req, res, next) => {
+    if(req.params.userId === req.auth._id) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            req.body,
+            { new: true },
+            (err, updatedUser) => {
+                if(err) {
+                    res.status(500)
+                    return next(err)
+                }
+                if(updatedUser) {
+                    return res.status(201).send(updatedUser.withoutPassword())
+                } else {
+                    res.status(500)
+                    return next(new Error('Bad request'))
+                }
+            }
+        )
+    } else {
+        res.status(500)
+        return next(new Error('Unauthorized request!'))
+    }
+    
 })
 
 // like a user
@@ -35,6 +81,7 @@ usersRouter.put('/like/:userId', (req, res, next) => {
                 res.status(500)
                 return next(err)
             }
+            // probably needs .withoutPassword()
             return res.status(201).send(updatedLikee)
         }
     )

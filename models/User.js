@@ -51,6 +51,12 @@ const userSchema = new Schema({
         required: true,
         enum: ['MAN', 'WOMAN', 'NON-BINARY', 'OTHER']
     },
+    genderPref: [
+        {
+            type: String, 
+            enum: ['MAN', 'WOMAN', 'NON-BINARY', 'OTHER']
+        }
+    ],
     likedUsers: {
         type: Array
     },
