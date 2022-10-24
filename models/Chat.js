@@ -7,9 +7,14 @@ const messageSchema = new Schema({
         ref: "User"
     }],
     chatLog: [{
-        messageText: {
-            type: String,
-
+        messageText: String,
+        sender: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
+        timeStamp: {
+            type: Date,
+            defatult: Date.now
         }
     }]
 })

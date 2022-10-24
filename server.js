@@ -17,6 +17,7 @@ app.use('/auth', require('./routes/authRouter'))
 app.use('/api', jwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
 app.use('/api/users', require('./routes/usersRouter'))
 app.use('/api/notes', require('./routes/notesRouter'))
+app.use('/api/chat', require('./routes/chatRouter'))
 
 app.use((err, req, res, next) => {
     console.log(err)
