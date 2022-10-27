@@ -27,12 +27,8 @@ const userSchema = new Schema({
     profileImgUrl: {
         type: String
     },
-    birthYear: {
-        type: Number,
-        required: true
-    },
-    birthMonth: {
-        type: Number,
+    birthday: {
+        type: Date,
         required: true
     },
     aboutMe: {

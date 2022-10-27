@@ -14,17 +14,14 @@ export default function Signup() {
         firstName: "",
         lastName: "",
         profileImgUrl: "",
-        birthYear: "",
-        birthMonth: "",
+        birthday: "",
         aboutMe: "",
         agePrefFloor: "",
-        agePrefCeiling: "",
         agePrefCeiling: "",
         gender: "",
         genderPref: []
     }
     const [inputs, setInputs] = useState(initInputs)
-    const [checkedBoxes, setCheckedBoxes] = useState([])
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -36,24 +33,19 @@ export default function Signup() {
 
     function handleCheck(e) {
         const { checked, value } = e.target
-        let updatedList = [...checkedBoxes]
+        let updatedList = [...inputs.genderPref]
         if (checked) {
-            updatedList = [...checkedBoxes, value]
+            updatedList = [...inputs.genderPref, value]
         } else {
-            updatedList.splice(checkedBoxes.indexOf(value), 1)
+            updatedList.splice(inputs.genderPref.indexOf(value), 1)
         }
-        setCheckedBoxes(updatedList)
-    }
-
-    function updateInputsWithGenderPref(prefArray) {
         setInputs(prevInputs => ({
             ...prevInputs,
-            genderPref: prefArray
+            genderPref: [...updatedList]
         }))
     }
 
     function handleSignup(signupObj) {
-        updateInputsWithGenderPref(checkedBoxes)
         signup(signupObj)
         navigate('/discovery')
     }
@@ -140,24 +132,13 @@ export default function Signup() {
                     value={inputs.profileImgUrl}
                     onChange={handleChange}
                 />
-                <label htmlFor="birthYear">Date of Birth</label>
+                <label htmlFor="birthday">Date of Birth</label>
                 <input 
-                    type="number"
-                    min="1922"
-                    max="2004"
-                    placeholder='Birth Year'
-                    name='birthYear'     
-                    value={inputs.birthYear}
-                    onChange={handleChange}
-                    required
-                />
-                <input 
-                    type="number"
-                    min="1"
-                    max="12"
-                    placeholder='Birth Month'
-                    name='birthMonth'     
-                    value={inputs.birthMonth}
+                    type="date"
+                    min="1922-01-01"
+                    max="2004-10-01"
+                    name='birthday'     
+                    value={inputs.birthday}
                     onChange={handleChange}
                     required
                 />

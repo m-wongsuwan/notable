@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { ProfilesContext } from "./context/ProfilesProvider";
 import { UserContext } from './context/UserProvider'
 import Navbar from "./Navbar";
 import Chat from "./routes/chat/Chat";
@@ -12,7 +13,8 @@ import Signup from "./routes/signup/Signup";
 
 export default function App() {
   
-  const { token, logout, login } = React.useContext(UserContext)
+  const { token, logout, login, user } = React.useContext(UserContext)
+  const { profileToView } = React.useContext(ProfilesContext)
   
   return (
     <div className="App">
@@ -44,7 +46,14 @@ export default function App() {
           path="/profile"
           element={
           <ProtectedRoute token={token} redirectTo="/" >
-            <Profile />
+            <Profile user={user} isUserProfile={true}/>
+          </ProtectedRoute>}
+        />
+        <Route 
+          path="/viewprofile"
+          element={
+          <ProtectedRoute token={token} redirectTo="/" >
+            <Profile user={profileToView} isUserProfile={false}/>
           </ProtectedRoute>}
         />
       </Routes>

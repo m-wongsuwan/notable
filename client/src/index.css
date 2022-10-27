@@ -17,3 +17,17 @@ nav {
   background-color: rgb(154, 47, 174);
   color: white;
 }
+
+.profileCard {
+  border: 1px solid black;
+  margin: 5px auto
+}
+
+.discovery--profileDisplay {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.profile--img {
+  width: 200px
+}

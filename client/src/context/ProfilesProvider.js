@@ -14,22 +14,106 @@ userAxios.interceptors.request.use(config => {
 
 export default function ProfilesProvider(props) {
 
-    const { user } = React.useContext(UserContext)
+    const emptyProfile = {
+        handle: "",
+        agePrefFloor: "",
+        profileImgUrl: "",
+        agePrefCeiling: "",
+        birthday: "",
+        firstName: "",
+        lastName: "",
+        gender: "",
+        genderPref: [],
+        _id: ""
+    }
+
+    const { user, token } = React.useContext(UserContext)
 
     const [profiles, setProfiles] = useState([])
 
-    React.useEffect(()=> {
+    const [profileToView, setProfileToView] = useState(emptyProfile)
+
+    function getProfiles() {
         userAxios.get('/api/users')
             .then(res => setProfiles(res.data))
             .catch(err => console.log(err))
-    }, [user])
+    }
+
+    function setFocusProfile(focusUserId) {
+        userAxios.get(`/api/users/${focusUserId}`)
+            .then(res => setProfileToView(res.data))
+            .catch(err => console.log(err))
+    }
+
+    function getAge(dateString) {
+        const today = new Date()
+        const birthDate = new Date(dateString)    
+        let age = today.getFullYear() - birthDate.getFullYear()
+        const m = today.getMonth() - birthDate.getMonth()
+        if( m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--
+        }
+        return age
+    }
+
+    function returnGenderString(gender) {
+        if(gender === 'MAN') {
+            return "man"
+        } else if (gender === 'WOMAN') {
+            return 'woman'
+        } else if (gender === "NON-BINARY") {
+            return 'non-binary person'
+        } else {
+            return 'person'
+        }
+    }
+
+    function seekingGenderString(genderPrefArray) {
+        let stringy = ""
+        function stringIsPresent(string) {
+            const containsString = (element) => element === string
+            return genderPrefArray.findIndex(containsString) > -1
+        }
+        if(stringIsPresent("MAN")) {
+            stringy = stringy + "Men    "
+        }
+        if(stringIsPresent("WOMAN")) {
+            stringy = stringy + "Women    "
+        }
+        if(stringIsPresent("NON-BINARY")) {
+            stringy = stringy + "Non-Binary Individuals    "
+        }
+        if(stringIsPresent("OTHER")) {
+            stringy = stringy + "Other Gender Identities"
+        }
+        return stringy
+    }
+
+    function returnAgeAndGenderString(dateString, gender) {
+        return `${getAge(dateString)} year old ${returnGenderString(gender)}`
+    }
+
+    React.useEffect(()=> {
+        if(token) {
+            getProfiles()
+        } else {
+            console.log("Get ready to find your person.")
+        }        
+    }, [token])
 
 
 
     return (
         <ProfilesContext.Provider
             value={{
-
+                profiles,
+                setFocusProfile,
+                profileToView,
+                // this broke it???? why???
+                getAge,
+                returnGenderString,
+                returnAgeAndGenderString,
+                seekingGenderString
             }}
         >
             {props.children}
