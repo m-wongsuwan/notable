@@ -36,8 +36,8 @@ notesRouter.post('/addnote/:userId', (req, res, next) => {
                         }
                     }
                 )
-                req.body.initiatingUser = req.auth._id
-                req.body.receivingUser = req.params.userId
+                req.body.initiatingUserId = req.auth._id
+                req.body.receivingUserId = req.params.userId
                 const newNote = new Note(req.body)
                 newNote.save((err, savedNote) => {
                     if(err) {
@@ -54,10 +54,10 @@ notesRouter.post('/addnote/:userId', (req, res, next) => {
     )
 })
 
-// get all notes for a user
+// get received notes for current user
 notesRouter.get('/getnotes/:userId', (req, res, next) => {
     Note.find(
-        { receivingUser: req.params.userId, receivingUser: req.auth._id },
+        { receivingUserId: req.params.userId },
         (err, notes) => {
             if(err) {
                 res.status(500)
@@ -71,7 +71,7 @@ notesRouter.get('/getnotes/:userId', (req, res, next) => {
 // get notes sent from a user
 notesRouter.get('/getsentnotes/:userId', (req, res, next) => {
     Note.find(
-        { initiatingUser: req.auth._id },
+        { initiatingUserId: req.auth._id },
         (err, notes) => {
             if(err) {
                 res.status(500)

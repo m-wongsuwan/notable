@@ -15,7 +15,7 @@ userAxios.interceptors.request.use(config => {
 export default function ProfilesProvider(props) {
 
     const emptyProfile = {
-        handle: "",
+        handle: "Tt",
         agePrefFloor: "",
         profileImgUrl: "",
         agePrefCeiling: "",

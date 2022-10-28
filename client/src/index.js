@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import UserProvider from './context/UserProvider'
 import ProfilesProvider from './context/ProfilesProvider';
+import ChatAndNoteProvider from './context/ChatAndNoteProvider';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,7 +13,9 @@ root.render(
   <BrowserRouter>
     <UserProvider>
       <ProfilesProvider>
-        <App />
+        <ChatAndNoteProvider>
+          <App />
+        </ChatAndNoteProvider>
       </ProfilesProvider>
     </UserProvider>  
   </BrowserRouter>

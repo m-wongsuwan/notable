@@ -35,7 +35,8 @@ export default function Navbar(props) {
             <h1>Notable ♥</h1>
             { token && 
                 <>
-                    <Link to='/chat' style={linkStyle} >Notes</Link> 
+                    <Link to='/notes' style={linkStyle} >Notes</Link> 
+                    <Link to='/chat' style={linkStyle} >Chat</Link> 
                     <Link to='/discovery' style={linkStyle} >Discovery</Link>
                     <Link to='/profile' style={linkStyle} >Profile</Link>  
                 </>

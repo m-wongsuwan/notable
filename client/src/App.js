@@ -4,6 +4,7 @@ import { ProfilesContext } from "./context/ProfilesProvider";
 import { UserContext } from './context/UserProvider'
 import Navbar from "./Navbar";
 import Chat from "./routes/chat/Chat";
+import Notes from "./routes/notes/Notes";
 import Discovery from "./routes/discovery/Discovery";
 import Home from "./routes/home/Home";
 import Profile from "./routes/profile/Profile";
@@ -40,6 +41,13 @@ export default function App() {
           element={
           <ProtectedRoute token={token} redirectTo="/" >
             <Chat />
+          </ProtectedRoute>}
+        />
+        <Route 
+          path="/notes"
+          element={
+          <ProtectedRoute token={token} redirectTo="/" >
+            <Notes />
           </ProtectedRoute>}
         />
         <Route 
