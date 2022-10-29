@@ -26,6 +26,7 @@ export default function ProfilesProvider(props) {
         genderPref: [],
         _id: ""
     }
+    
 
     const { user, token } = React.useContext(UserContext)
 
@@ -40,9 +41,15 @@ export default function ProfilesProvider(props) {
     }
 
     function setFocusProfile(focusUserId) {
-        userAxios.get(`/api/users/${focusUserId}`)
-            .then(res => setProfileToView(res.data))
-            .catch(err => console.log(err))
+        setProfileToView(profiles.find(profile => profile._id === focusUserId))
+        // userAxios.get(`/api/users/${focusUserId}`)
+        //     .then(res => setProfileToView(res.data))
+        //     .catch(err => console.log(err))
+    }
+
+    function getName(id) {
+        const found = profiles.find(element => element._id === id)
+        return found.firstName
     }
 
     function getAge(dateString) {
@@ -109,6 +116,7 @@ export default function ProfilesProvider(props) {
                 profiles,
                 setFocusProfile,
                 profileToView,
+                getName,
                 // this broke it???? why???
                 getAge,
                 returnGenderString,

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom'
 import { ProfilesContext } from "../../../context/ProfilesProvider";
+import noprofilepic from '../../../images/noprofilepic.svg'
 
 export default function ProfileCard(props) {
 
@@ -30,7 +31,7 @@ export default function ProfileCard(props) {
         <div className="profileCard">
             <h2>{capitalizeName(handle)}</h2>
             <h3>{returnAgeAndGenderString(birthday, gender)}</h3>
-            <img src={profileImgUrl} style={{width: "200px", maxHeight: "600px"}} />
+            { profileImgUrl? <img src={profileImgUrl} className='profileCard--img'  /> : <img src={noprofilepic} className='profileCard--img' alt="Profile" />}
             <button onClick={()=> {
                 setFocusProfile(_id)
                 navigate('/viewprofile')

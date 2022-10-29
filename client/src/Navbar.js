@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
+import { ChatAndNoteContext } from "./context/ChatAndNoteProvider";
+import { ProfilesContext } from "./context/ProfilesProvider";
 
 // logout from navbar or profile? see bottom
     // currently profile
 
 export default function Navbar(props) {
+
+    const { profiles, profileToView } = React.useContext(ProfilesContext)
+    const { chats } = React.useContext(ChatAndNoteContext)
 
     const { login, logout, token } = props
 
@@ -70,7 +75,9 @@ export default function Navbar(props) {
             
             }
             
-
+            <button onClick={()=> console.log(profiles)}>profiles</button>
+            <button onClick={()=> console.log(profileToView)}>profile to view</button>
+            <button onClick={()=> console.log(chats)}>chats</button>
         </nav>
     )
 }
