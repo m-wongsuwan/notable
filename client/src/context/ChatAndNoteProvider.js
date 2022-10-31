@@ -15,12 +15,14 @@ userAxios.interceptors.request.use(config => {
 
 export default function ChatAndNoteProvider(props) {
 
+    const initChats = [{users: [{_id: "1"}, {_id: "2"}]}]
+
     const { user, token } = React.useContext(UserContext)
     const { profileToView } = React.useContext(ProfilesContext)
 
     const [sentNotes, setSentNotes] = useState([])
     const [receivedNotes, setReceivedNotes] = useState([])
-    const [chats, setChats] = useState([])
+    const [chats, setChats] = useState(initChats)
     const [focusChat, setFocusChat] = React.useState({})
 
     
@@ -63,14 +65,14 @@ export default function ChatAndNoteProvider(props) {
         if(token) {
             getSentNotes(user._id)
         }
-    }, [token])
+    }, [token, user._id])
 
     // i don't think i need to make an api call when we have chats state to work with
-    function getConversation(chatId) {
-        userAxios.get(`/api/chat/getconversation/${chatId}`)
-            .then(res => setFocusChat(res.data))
-            .catch(err => console.log(err))
-    }
+    // function getConversation(chatId) {
+    //     userAxios.get(`/api/chat/getconversation/${chatId}`)
+    //         .then(res => setFocusChat(res.data))
+    //         .catch(err => console.log(err))
+    // }
 
     // React.useEffect(()=> {
     //     if(token && profileToView) {
@@ -93,7 +95,11 @@ export default function ChatAndNoteProvider(props) {
 
     function usersHaveChat(otherUserId) {
         const usersContainsId = (element) => element.users.indexOf(otherUserId) > -1
-        return console.log(chats.some(usersContainsId))
+        return chats.some(usersContainsId)
+    }
+
+    function findChatWithThisUser(userId) {
+        return chats.find(chat => chat.users.indexOf(userId) > -1 && chat.users.indexOf(user._id) > -1)
     }
 
     function sendMessage(userId, chatId, updateObj){
@@ -128,7 +134,8 @@ export default function ChatAndNoteProvider(props) {
                 focusChat,
                 setFocusChat,
                 usersHaveChat,
-                sendMessage
+                sendMessage,
+                findChatWithThisUser
             }}
         >
             {props.children}

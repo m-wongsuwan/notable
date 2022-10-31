@@ -5,20 +5,33 @@ import ProfileCard from './components/ProfileCard'
 
 export default function Discovery() {
 
-    const { profiles } = React.useContext(ProfilesContext)
+    const { profiles, getAge } = React.useContext(ProfilesContext)
     const { user } = React.useContext(UserContext)
 
+    function isTooOld(birthday) {
+        return getAge(birthday) > user.agePrefCeiling
+    }
+    function isTooYoung(birthday) {
+        return getAge(birthday) < user.agePrefFloor
+    }
+
+    function matchesGenderPref(gender) {
+        return user.genderPref.indexOf(gender) > -1
+    }
+
     const profilesMap = profiles.map(profile => {
+        if(!isTooOld(profile.birthday) && !isTooYoung(profile.birthday) && matchesGenderPref(profile.gender) )
         return (
-            <ProfileCard 
-                profile={profile}
-                key={profile._id}
-            />
+                <ProfileCard 
+                    profile={profile}
+                    key={profile._id}
+                />
         )
     })
 
     return (
         <div className='discovery'>
+            <button onClick={()=> console.log(user)}>user</button>
             <h1>Discovery</h1>
             <div className='discovery--profileDisplay'>
                 {profilesMap}

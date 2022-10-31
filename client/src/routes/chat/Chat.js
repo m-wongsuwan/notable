@@ -6,8 +6,20 @@ import { UserContext } from '../../context/UserProvider'
 export default function Chat() {
 
     const { user } = React.useContext(UserContext)
-    const { setFocusProfile, profileToView, setProfileToView, getName, profiles } = React.useContext(ProfilesContext)
-    const { chats, getChats, focusChat, setFocusChat, sendMessage } = React.useContext(ChatAndNoteContext)
+    const { 
+        setFocusProfile, 
+        profileToView, 
+        // setProfileToView, 
+        getName, 
+        // profiles 
+    } = React.useContext(ProfilesContext)
+    const { 
+        chats, 
+        // getChats, 
+        focusChat, 
+        setFocusChat, 
+        sendMessage 
+    } = React.useContext(ChatAndNoteContext)
 
     // const name = chats.map((chat, index) => {
     //     return getName(chat.users.find(element => element !== user._id))
@@ -33,16 +45,24 @@ export default function Chat() {
         )
     })
 
-    function displayChat(chatObj) {
-
+    function displayMessages(chatObj) {
+        return chatObj.chatLog.map((message, index) => {
+            return (
+                <div key={`message-${index}`} className={`chat--${message.sender === user._id ? 'user' : 'crush'}Message`}>
+                    <h4>{getName(message.sender)}</h4>
+                    <p>{message.messageText}</p>
+                    <br />
+                </div>
+            )
+        })
     }
 
     return (
         <div className='chat'>
             <h1>Chat</h1>
             <button onClick={()=> {
-                console.log(chats)
-            }} >chats</button>
+                console.log(inputs)
+            }} >inputs</button>
             <div className='chat--gridContainer'>
                 <div className='chat--chatList'>
                     {chats ? nameList : ""}
@@ -50,13 +70,27 @@ export default function Chat() {
                 <div className='chat--chatBox' >
                     <p>chatbox</p>
                     <p>{profileToView.firstName}</p>
-                    <button onClick={()=> console.log(focusChat)} >focus chat</button>
-                    <button onClick={()=> console.log('hi')}>log something</button>
-                    <form onSubmit={(e)=> {
-                        e.preventDefault()
-                        sendMessage(profileToView._id, focusChat._id, inputs)
-                        setInputs(initInputs)
-                    }}>
+                    {displayMessages(focusChat)}
+                    <form
+                        className='chat--sendMessageForm'
+                        onSubmit={(e)=> {
+                            e.preventDefault()
+                            sendMessage(profileToView._id, focusChat._id, inputs)
+                            setFocusChat(prevState => {
+                                let newChatLogObj = inputs
+                                newChatLogObj.sender = user._id
+                                return ({
+                                    ...prevState,
+                                    chatLog: [...prevState.chatLog, newChatLogObj]
+                                })
+                            })
+                            // setFocusChat(prevState => ({
+                            //     ...prevState,
+                            //     chatLog: [...prevState.chatLog, inputs]
+                            // }))
+                            setInputs(initInputs)
+                        }}
+                    >
                         <input 
                             type="text"
                             placeholder='Aa'

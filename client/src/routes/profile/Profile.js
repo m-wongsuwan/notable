@@ -12,9 +12,9 @@ export default function Profile(props) {
 
     const { logout } = React.useContext(UserContext)
     const { 
-        getName, 
-        getAge, 
-        returnGenderString, 
+        // getName, 
+        // getAge, 
+        // returnGenderString, 
         returnAgeAndGenderString, 
         seekingGenderString,
         setFocusProfile
@@ -24,18 +24,20 @@ export default function Profile(props) {
         returnLeftNote,
         startChat,
         setFocusChat,
-        usersHaveChat
+        usersHaveChat,
+        // chats,
+        findChatWithThisUser
      } = React.useContext(ChatAndNoteContext)
 
     const {
-        handle,
+        // handle,
         agePrefFloor,
         profileImgUrl,
         agePrefCeiling,
         birthday,
         firstName,
         aboutMe,
-        lastName,
+        // lastName,
         gender,
         genderPref,
         _id
@@ -126,7 +128,7 @@ export default function Profile(props) {
                         startChat(_id)
                     }
                     setFocusProfile(_id)
-                    setFocusChat(_id)
+                    setFocusChat(findChatWithThisUser(_id))
                     navigate('/chat')}}
                 >
                     {usersHaveChat(_id) ? "Go to Chat" : "Start Chat!"}</button>
