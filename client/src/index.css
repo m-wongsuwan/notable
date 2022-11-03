@@ -1,5 +1,7 @@
 * {
   transition: all .8s;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -18,22 +20,129 @@ code {
 }
 
 nav {
-  background-color: rgb(154, 47, 174);
+  background-color: rgb(240, 220, 202);
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav h1 {
+  font-size: 35px;
+}
+nav form {
+  padding: 10px
+}
+nav form input {
+  height: 25px;
+}
+nav form button {
+  margin: 0px 5px;
   color: white;
+  border: none;
+  background-color: black;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+.home--signupBanner {
+  /* background-color: rgb(207, 214, 204); */
+  background-color: black;
+  color: white;
+  height: 35px;
+  width: 100%;
+
+}
+.home--hero {
+  background-color: rgb(240, 220, 202);
+  height: 300px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 0px 0px 0px 10%
+}
+.hero--text {
+  font-size: 20px;
+}
+.home--hero h1, .home--hero div {
+  position: relative;
+}
+.home--hero h1 {
+  font-size: 50px;
+  top: 70px;
+}
+.home--hero div {
+  top: 90px;
+}
+.home--cutiesDisplay {
+  display: flex;
+  justify-content: space-around;
+}
+.up {
+  position: relative;
+  top: -105px
+}
+.down {
+  position: relative;
+  top: -42px
+}
+.home--personImg {
+  height: 250px;
+  border-radius: 10px;
+  border: 3px solid black
+}
+.home--body {
+  margin: 0 10%
+}
+.home--bodyImg {
+  border-radius: 10px;
+  height: 250px
+}
+.home--bodyLeft, .home--bodyRight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 40px 5%;
+}
+.home--textLeft {
+  text-align: left;
+}
+.home--leftImg, .home--textRight, .home--topImgDiv {
+  text-align: right;
 }
 
-.profileCard {
-  border: 1px solid black;
-  margin: 5px auto
+.home--text {
+  padding: 30px;
+  margin-top: 40px;
 }
-.profileCard--img {
-  width: 300px;
-  max-height: 1000px;
+.home--text h2 {
+  margin: 0 0 10px 0
+}
+
+.profileCard, .note, .profile {
+  margin: 14px auto;
+  padding: 10px;
+  background-color: rgb(240, 220, 202);
+  text-align: center;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 5px black;
+}
+.profile {
+  width: 250px;
+}
+.profileCard h3 {
+  margin: 0px 0px 10px 0px
+}
+.profileCard--img, .profile--img {
+  max-width: 80%;
+  max-height: 200px;
+  border-radius: 10px;
+  border: 3px solid black;
 }
 
 .discovery--profileDisplay {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+}
+.trimImage {
+  display: none
 }
 
 .profile--img {
@@ -42,14 +151,133 @@ nav {
   transform: translateZ(0);
   transition: opacity .25s linear;
   will-change: opacity;
-
 }
 
 .chat--gridContainer {
   display: grid;
   grid-template-columns: 1fr 4fr;
 }
-/* .chat--chatBox {
-  display: flex;
-  flex-direction: column-reverse;
+
+.pageHead {
+  text-align: center;
+  margin: 20px;
+  font-size: 40px;
+}
+
+.notes--gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.notes--received, .notes--left {
+  text-align: center;
+}
+.note button, .profile button, .chat button {
+  margin: 5px 5px;
+  color: white;
+  border: none;
+  background-color: black;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+.chat button {
+  height: 45px;
+  width: 18%;
+}
+.chat--chatBox {
+  position: relative;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px 400px 50px;
+}
+.chat--chatBox h2 {
+  text-align: center;
+}
+.chat--messageDisplay {
+  overflow-y: auto;
+  height: 400px;
+  margin: 0px 10px 0px 0px;
+  background-color: rgb(240, 220, 202);
+  padding: 20px;
+}
+.chat-chatList {
+  margin: 10px;
+}
+.chat--name {
+  margin: 10px 0px
+}
+.chat--name:hover {
+  cursor: pointer;
+}
+.chat--userMessage {
+text-align: right;
+}
+.chat form {
+  text-align: right;
+  margin-right: 22px;
+  margin-top: 50px;
+}
+.chat form input {
+  width: 75%;
+  height: 45px
+}
+.chat--message {
+  border-radius: 10px;
+  /* max-width: 150px; */
+  padding: 10px
+}
+/* .chat--namePlusMessage {
+  max-width: 300px;
 } */
+@media only screen and (min-width: 600px) { 
+  .discovery--profileDisplay {
+    grid-template-columns: 1fr 1fr;
+  }
+  .profileCard {
+      max-width: 400px;
+  }
+  .profileCard--img {
+    max-height: 200px;
+  }
+  .profile {
+    width: 550px;
+  }
+  /* .chat form input {
+    width: 350px
+  } */
+  .chat--messageDisplay {
+    overflow: auto;
+    margin: 0px 50px 0px 0px;
+  }
+  .chat form {
+    text-align: right;
+    margin-right: 50px
+  }
+}
+@media only screen and (min-width: 1000px) { 
+  .trimImage {
+    display:flex
+  }
+  .hero--text {
+    font-size: 25px;
+  }
+  .discovery--profileDisplay {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .profileCard--img {
+    max-height: 326;
+  }
+  /* .chat form input {
+    width: 500px
+  } */
+  .chat--messageDisplay {
+    overflow: auto;
+    margin: 0px 200px 0px 0px;
+  }
+  .chat form {
+    text-align: right;
+    margin-right: 200px
+  }
+
+}

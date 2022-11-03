@@ -104,36 +104,40 @@ export default function Profile(props) {
     }
 
     return (
-        <div className='profile'>
-            {props.isUserProfile && <h1>Welcome to Your Profile</h1>}
-            <h1> {capitalizeName(firstName)}</h1>
-            <h3>{returnAgeAndGenderString(birthday, gender)}</h3>
-            {returnLogOutButton()}
-            { profileImgUrl ? <img className='profile--img' src={profileImgUrl} alt="Profile" /> : <img src={noprofilepic} className='profile--img' alt="Profile" />}
-            <div className='profile--about'>
-                <h2>About {capitalizeName(firstName)}</h2>
-                <p>{aboutMe}</p>
-            </div>
-            <div className='profile--seeking'>
-                <h3>Seeking...</h3>
-                <p>Age {agePrefFloor} to {agePrefCeiling}</p>
-                <p>{seekingGenderString(genderPref)}</p>
+        <>
+            {props.isUserProfile && <h1 className='pageHead'>Welcome to Your Profile</h1>}
+            <div className='profile'>
                 
+                <h1> {capitalizeName(firstName)}</h1>
+                <h3>{returnAgeAndGenderString(birthday, gender)}</h3>
+                
+                { profileImgUrl ? <img className='profile--img' src={profileImgUrl} alt="Profile" /> : <img src={noprofilepic} className='profile--img' alt="Profile" />}
+                <div className='profile--about'>
+                    { aboutMe && <h2>About {capitalizeName(firstName)}</h2>}
+                    <p>{aboutMe}</p>
+                </div>
+                <div className='profile--seeking'>
+                    <h3>Seeking...</h3>
+                    <p>Age {agePrefFloor} to {agePrefCeiling}</p>
+                    <p>{seekingGenderString(genderPref)}</p>
+                    
+                </div>
+                { props.isUserProfile ? "" : conditionalNoteDisplay()}
+                {/* conditionally render reminder that you both most leave a note before chat can occur */}
+                { !props.isUserProfile && 
+                    <button onClick={()=> {
+                        if(!usersHaveChat(_id)){
+                            startChat(_id)
+                        }
+                        setFocusProfile(_id)
+                        setFocusChat(findChatWithThisUser(_id))
+                        navigate('/chat')}}
+                    >
+                        {usersHaveChat(_id) ? "Go to Chat" : "Start Chat!"}</button>
+                }
+                {props.isUserProfile && returnLogOutButton()}
             </div>
-            { props.isUserProfile ? "" : conditionalNoteDisplay()}
-            {/* conditionally render reminder that you both most leave a note before chat can occur */}
-            { !props.isUserProfile && 
-                <button onClick={()=> {
-                    if(!usersHaveChat(_id)){
-                        startChat(_id)
-                    }
-                    setFocusProfile(_id)
-                    setFocusChat(findChatWithThisUser(_id))
-                    navigate('/chat')}}
-                >
-                    {usersHaveChat(_id) ? "Go to Chat" : "Start Chat!"}</button>
-            }
-            <button onClick={()=> usersHaveChat(_id)}>users have chat?</button>
-        </div>
+        </>
+        
     )
 }

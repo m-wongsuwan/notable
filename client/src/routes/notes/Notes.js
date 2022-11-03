@@ -12,7 +12,7 @@ export default function Notes() {
 
     const sentNotesDisplay = sentNotes.map((note, index) => {
         return (
-            <div className='leftNote' key={`leftNote${index}`}>
+            <div className='leftNote note' key={`leftNote${index}`}>
                 <h3>{getName(note.receivingUserId)}</h3>
                 <p>{note.noteText}</p>
                 <button 
@@ -28,7 +28,7 @@ export default function Notes() {
 
     const receivedNotesDisplay = receivedNotes.map((note, index) => {
         return (
-            <div className='receivedNote' key={`leftNote${index}`}>
+            <div className='receivedNote note' key={`leftNote${index}`}>
                 <h3>{getName(note.initiatingUserId)}</h3>
                 <p>{note.noteText}</p>
                 <button 
@@ -52,11 +52,18 @@ export default function Notes() {
 
     return (
         <div className='notes'>
-            <h1>Notes</h1>
-            <h2>Notes received</h2>
-            {receivedNotes.length > 0 ? receivedNotesDisplay : noNotesMessage('received')}
-            <h2>Notes left</h2>
-            {sentNotes.length > 0 ? sentNotesDisplay : noNotesMessage('sent')}
+            <h1 className='pageHead'>Notes</h1>
+            <div className='notes--gridContainer'>
+                <div className='notes--received'>
+                    <h2>Received Notes</h2>
+                    {receivedNotes.length > 0 ? receivedNotesDisplay : noNotesMessage('received')}
+                </div>
+                <div className='notes--left'>
+                    <h2>Notes You Left</h2>
+                    {sentNotes.length > 0 ? sentNotesDisplay : noNotesMessage('sent')}
+                </div>
+            </div>
+            
         </div>
     )
 }

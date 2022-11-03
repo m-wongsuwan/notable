@@ -37,7 +37,7 @@ export default function Chat() {
     const nameList = chats.map((chat, index) => {
         return(
             <div key={index}>
-                <h3 onClick={()=> {
+                <h3 className='chat--name' onClick={()=> {
                     setFocusProfile(chat.users.find(element => element !== user._id))
                     setFocusChat(chat)
                 } }>{getName(chat.users.find(element => element !== user._id))}</h3>
@@ -48,29 +48,38 @@ export default function Chat() {
     function displayMessages(chatObj) {
         return chatObj.chatLog.map((message, index) => {
             return (
-                <div key={`message-${index}`} className={`chat--${message.sender === user._id ? 'user' : 'crush'}Message`}>
+                <div key={`message-${index}`} className={`chat--${message.sender === user._id ? 'user' : 'crush'}Message chat--namePlusMessage`}>
                     <h4>{getName(message.sender)}</h4>
-                    <p>{message.messageText}</p>
+                    <p className='chat--message'>{message.messageText}</p>
                     <br />
                 </div>
             )
         })
     }
+    const messageDisplay = document.getElementById('chat--messageDisplay')
+
+    function scrollToBottom() {
+        document.getElementById('chat--messageDisplay').scrollTop = messageDisplay.scrollHeight + 1130 - 859
+    }
+
+    scrollToBottom()
+
 
     return (
         <div className='chat'>
-            <h1>Chat</h1>
-            <button onClick={()=> {
-                console.log(inputs)
-            }} >inputs</button>
+            <h1 className='pageHead'>Chat</h1>
+
             <div className='chat--gridContainer'>
                 <div className='chat--chatList'>
+                    <h2>Active Chats</h2>
                     {chats ? nameList : ""}
                 </div>
                 <div className='chat--chatBox' >
-                    <p>chatbox</p>
-                    <p>{profileToView.firstName}</p>
-                    {displayMessages(focusChat)}
+                    <h2>Talk to {profileToView.firstName}!</h2>
+                    <div className='chat--messageDisplay' id='chat--messageDisplay'>
+                        {displayMessages(focusChat)}
+                    </div>
+
                     <form
                         className='chat--sendMessageForm'
                         onSubmit={(e)=> {

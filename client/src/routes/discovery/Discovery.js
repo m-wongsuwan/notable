@@ -31,8 +31,7 @@ export default function Discovery() {
 
     return (
         <div className='discovery'>
-            <button onClick={()=> console.log(user)}>user</button>
-            <h1>Discovery</h1>
+            <h1 className='pageHead'>Discovery</h1>
             <div className='discovery--profileDisplay'>
                 {profilesMap}
             </div>

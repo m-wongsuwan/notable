@@ -31,7 +31,7 @@ export default function Navbar(props) {
     const linkStyle = {
         textDecoration: "none",
         fontSize: "20px",
-        color: "white",
+        color: "black",
         margin: "0px 20px"
     }
 
@@ -39,15 +39,15 @@ export default function Navbar(props) {
         <nav style={{display: "flex"}}>
             <h1>Notable ♥</h1>
             { token && 
-                <>
+                <div className="nav--links" >
                     <Link to='/notes' style={linkStyle} >Notes</Link> 
                     <Link to='/chat' style={linkStyle} >Chat</Link> 
                     <Link to='/discovery' style={linkStyle} >Discovery</Link>
                     <Link to='/profile' style={linkStyle} >Profile</Link>  
-                </>
+                </div>
             }
             { !token && 
-                <>
+                <div className="nav--loginForm">
                 <form onSubmit={(e)=>{
                     e.preventDefault()
                     login(loginInputs)
@@ -69,15 +69,9 @@ export default function Navbar(props) {
                     />
                     <button>Log In</button>
                 </form>
-
-                <Link to='/signup' style={linkStyle} >Sign Up</Link>
-                </>
+                </div>
             
             }
-            
-            <button onClick={()=> console.log(profiles)}>profiles</button>
-            <button onClick={()=> console.log(profileToView)}>profile to view</button>
-            <button onClick={()=> console.log(chats)}>chats</button>
         </nav>
     )
 }
