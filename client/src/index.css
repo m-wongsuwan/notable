@@ -52,11 +52,11 @@ nav form button {
 
 }
 .home--hero {
-  background-color: rgb(240, 220, 202);
-  height: 300px;
+  background-image: linear-gradient(rgb(240, 220, 202), rgb(240, 220, 202), white);
+  height: 400px;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  padding: 0px 0px 0px 10%
+  padding: 0px 0px 0px 10%;
 }
 .hero--text {
   font-size: 20px;
@@ -77,11 +77,11 @@ nav form button {
 }
 .up {
   position: relative;
-  top: -105px
+  top: -155px
 }
 .down {
   position: relative;
-  top: -42px
+  top: -92px
 }
 .home--personImg {
   height: 250px;
@@ -93,7 +93,7 @@ nav form button {
 }
 .home--bodyImg {
   border-radius: 10px;
-  height: 250px
+  height: 150px
 }
 .home--bodyLeft, .home--bodyRight {
   display: grid;
@@ -108,8 +108,8 @@ nav form button {
 }
 
 .home--text {
-  padding: 30px;
-  margin-top: 40px;
+  padding: 0px;
+  margin-top: 0px;
 }
 .home--text h2 {
   margin: 0 0 10px 0
@@ -171,7 +171,7 @@ nav form button {
 .notes--received, .notes--left {
   text-align: center;
 }
-.note button, .profile button, .chat button {
+.note button, .profile button, .chat button, .profileCard--button {
   margin: 5px 5px;
   color: white;
   border: none;
@@ -196,7 +196,7 @@ nav form button {
 }
 .chat--messageDisplay {
   overflow-y: auto;
-  height: 400px;
+  height: 410px;
   margin: 0px 10px 0px 0px;
   background-color: rgb(240, 220, 202);
   padding: 20px;
@@ -219,13 +219,17 @@ text-align: right;
   margin-top: 50px;
 }
 .chat form input {
-  width: 75%;
+  width: 79%;
   height: 45px
 }
 .chat--message {
   border-radius: 10px;
   /* max-width: 150px; */
-  padding: 10px
+  padding: 10px 0px
+}
+.chat--chatList {
+  padding: 15px;
+  background-color: lightgrey;
 }
 /* .chat--namePlusMessage {
   max-width: 300px;
@@ -258,6 +262,9 @@ text-align: right;
 @media only screen and (min-width: 1000px) { 
   .trimImage {
     display:flex
+  }
+  .home--bodyImg {
+    height: 250px
   }
   .hero--text {
     font-size: 25px;

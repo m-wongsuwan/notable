@@ -9,7 +9,7 @@ import { ProfilesContext } from "./context/ProfilesProvider";
 export default function Navbar(props) {
 
     const { profiles, profileToView } = React.useContext(ProfilesContext)
-    const { chats } = React.useContext(ChatAndNoteContext)
+    const { chats, focusChat } = React.useContext(ChatAndNoteContext)
 
     const { login, logout, token } = props
 

@@ -75,7 +75,7 @@ export default function Profile(props) {
     function conditionalNoteDisplay() {
         if(leftNote) {
             return (
-                <div className='leftNote'>
+                <div className='leftNote profile'>
                     <h2>Your note...</h2>
                     {/* <h3>{getName(leftNote.receivingUserId)}</h3> */}
                     <p>{leftNote.noteText}</p>
@@ -83,7 +83,7 @@ export default function Profile(props) {
             )
         } else {
             return (
-                <form onSubmit={(e)=> {
+                <form className='profile' onSubmit={(e)=> {
                     e.preventDefault()
                     leaveNote(inputs, _id)
                     setInputs(initInputs)
@@ -111,7 +111,11 @@ export default function Profile(props) {
                 <h1> {capitalizeName(firstName)}</h1>
                 <h3>{returnAgeAndGenderString(birthday, gender)}</h3>
                 
-                { profileImgUrl ? <img className='profile--img' src={profileImgUrl} alt="Profile" /> : <img src={noprofilepic} className='profile--img' alt="Profile" />}
+                { profileImgUrl ? 
+                    <div className='profile--hideContainer'><img className='profile--img' src={profileImgUrl} alt="Profile" /></div> 
+                :
+                    <div className='profile--hideContainer'><img src={noprofilepic} className='profile--img' alt="Profile" /></div>
+                }
                 <div className='profile--about'>
                     { aboutMe && <h2>About {capitalizeName(firstName)}</h2>}
                     <p>{aboutMe}</p>
@@ -122,7 +126,7 @@ export default function Profile(props) {
                     <p>{seekingGenderString(genderPref)}</p>
                     
                 </div>
-                { props.isUserProfile ? "" : conditionalNoteDisplay()}
+                
                 {/* conditionally render reminder that you both most leave a note before chat can occur */}
                 { !props.isUserProfile && 
                     <button onClick={()=> {
@@ -137,6 +141,7 @@ export default function Profile(props) {
                 }
                 {props.isUserProfile && returnLogOutButton()}
             </div>
+            { props.isUserProfile ? "" : conditionalNoteDisplay()}
         </>
         
     )

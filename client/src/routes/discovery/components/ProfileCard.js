@@ -33,7 +33,7 @@ export default function ProfileCard(props) {
             <h3>{returnAgeAndGenderString(birthday, gender)}</h3>
             { profileImgUrl? <img src={profileImgUrl} className='profileCard--img'  /> : <img src={noprofilepic} className='profileCard--img' alt="Profile" />}
             <br />
-            <button onClick={()=> {
+            <button className="profileCard--button" onClick={()=> {
                 setFocusProfile(_id)
                 navigate('/viewprofile')
             }}>See Profile</button>

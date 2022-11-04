@@ -34,35 +34,49 @@ export default function Chat() {
         }))
     }
 
+    function capitalizeName(string) {
+        if (string) {
+            return string[0].toUpperCase() + string.substring(1)
+        }
+    }
+
     const nameList = chats.map((chat, index) => {
         return(
             <div key={index}>
                 <h3 className='chat--name' onClick={()=> {
                     setFocusProfile(chat.users.find(element => element !== user._id))
                     setFocusChat(chat)
-                } }>{getName(chat.users.find(element => element !== user._id))}</h3>
+                } }>-{capitalizeName(getName(chat.users.find(element => element !== user._id)))}</h3>
             </div>
         )
     })
-
+ // mjb broke this cahtting with mo
     function displayMessages(chatObj) {
-        return chatObj.chatLog.map((message, index) => {
+        if (chatObj.chatLog) {
+            return chatObj.chatLog.map((message, index) => {
+                return (
+                    <div key={`message-${index}`} className={`chat--${message.sender === user._id ? 'user' : 'crush'}Message chat--namePlusMessage`}>
+                        <h4>{getName(message.sender)}</h4>
+                        <p className='chat--message' onClick={scrollToBottom()}>{message.messageText}</p>
+                        <br />
+                    </div>
+                )
+            })
+        } else {
             return (
-                <div key={`message-${index}`} className={`chat--${message.sender === user._id ? 'user' : 'crush'}Message chat--namePlusMessage`}>
-                    <h4>{getName(message.sender)}</h4>
-                    <p className='chat--message'>{message.messageText}</p>
-                    <br />
+                <div>
+                    <h3>Start a chat with someone on the left hand side, or check out some profiles on the discovery page.</h3>
                 </div>
             )
-        })
+        }
+
     }
     const messageDisplay = document.getElementById('chat--messageDisplay')
 
     function scrollToBottom() {
-        document.getElementById('chat--messageDisplay').scrollTop = messageDisplay.scrollHeight + 1130 - 859
+        messageDisplay ? document.getElementById('chat--messageDisplay').scrollTop = messageDisplay.scrollHeight + 1130 - 859 : console.log('hi')
     }
 
-    scrollToBottom()
 
 
     return (
@@ -75,12 +89,12 @@ export default function Chat() {
                     {chats ? nameList : ""}
                 </div>
                 <div className='chat--chatBox' >
-                    <h2>Talk to {profileToView.firstName}!</h2>
+                    {profileToView.firstName ? <h2>Getting to know {capitalizeName(profileToView.firstName)}!</h2> : <h2>Who do you want to connect with?</h2>}
                     <div className='chat--messageDisplay' id='chat--messageDisplay'>
-                        {displayMessages(focusChat)}
+                        {focusChat !== {} && displayMessages(focusChat)}
                     </div>
 
-                    <form
+                    {profileToView.firstName && <form
                         className='chat--sendMessageForm'
                         onSubmit={(e)=> {
                             e.preventDefault()
@@ -109,7 +123,7 @@ export default function Chat() {
                             required
                         />
                     <button>Send</button>
-                </form>
+                </form>}
                 </div>
 
             </div>

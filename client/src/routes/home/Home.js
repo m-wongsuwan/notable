@@ -25,7 +25,7 @@ export default function Home() {
             <div className="home--cutiesDisplay">
                 <img className="home--personImg down" src="https://images.unsplash.com/photo-1578979879663-4ba6a968a50a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXR0cmFjdGl2ZSUyMHdvbWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="cute person" />
                 <img className="home--personImg up" src="https://images.unsplash.com/photo-1593757147298-e064ed1419e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YXR0cmFjdGl2ZSUyMG1hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="cute person" />
-                <img className="home--personImg down trimImage" src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjB3b21hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="cute person" />
+                <img className="home--personImg down " src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjB3b21hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" alt="cute person" />
                 <img className="home--personImg up trimImage" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="cute person" />
             </div>
             <div className="home--body">

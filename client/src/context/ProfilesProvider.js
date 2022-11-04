@@ -49,7 +49,11 @@ export default function ProfilesProvider(props) {
 
     function getName(id) {
         const found = profiles.find(element => element._id === id)
-        return found.firstName
+        if(found) {
+            return found.firstName
+        } else {
+            return "N/A"
+        }
     }
 
     function getAge(dateString) {
