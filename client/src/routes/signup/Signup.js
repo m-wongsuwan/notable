@@ -52,12 +52,12 @@ export default function Signup() {
 
     return (
         <div className='signup'>
-            <h1>Signup</h1>
+            <h1 className='pageHead' >Signup</h1>
             <form onSubmit={(e)=> {
                 e.preventDefault()
                 handleSignup(inputs)
             }}>
-                <label htmlFor="handle">Handle</label>
+                <label htmlFor="handle">Handle: </label>
                 <input 
                     type="text"
                     placeholder='Handle'
@@ -66,7 +66,8 @@ export default function Signup() {
                     onChange={handleChange}
                     required
                 />
-                <label htmlFor="password">Password</label>
+
+                <label htmlFor="password">  Password: </label>
                 <input 
                     type="password"
                     placeholder='Password'
@@ -75,7 +76,8 @@ export default function Signup() {
                     onChange={handleChange}
                     required
                 />
-                <label htmlFor="firstName">First Name</label>
+                <br />
+                <label htmlFor="firstName">First Name: </label>
                 <input 
                     type="text"
                     placeholder='First Name'
@@ -84,7 +86,7 @@ export default function Signup() {
                     onChange={handleChange}
                     required
                 />
-                <label htmlFor="lastName">Last Name</label>
+                <label htmlFor="lastName">  Last Name: </label>
                 <input 
                     type="text"
                     placeholder='Last Name'
@@ -92,6 +94,8 @@ export default function Signup() {
                     value={inputs.lastName}
                     onChange={handleChange}
                 />
+                <br />
+                <label htmlFor="gender">Gender: </label>
                 <input 
                     type="radio" 
                     value="WOMAN" 
@@ -124,15 +128,8 @@ export default function Signup() {
                     onChange={handleChange}
                 />
                 <label htmlFor="gender">Other</label>
-                <label htmlFor="profileImgUrl">Profile Image URL</label>
-                <input 
-                    type="text"
-                    placeholder='Profile Image URL'
-                    name='profileImgUrl'     
-                    value={inputs.profileImgUrl}
-                    onChange={handleChange}
-                />
-                <label htmlFor="birthday">Date of Birth</label>
+                <br />
+                <label htmlFor="birthday">Date of Birth: </label>
                 <input 
                     type="date"
                     min="1922-01-01"
@@ -142,17 +139,28 @@ export default function Signup() {
                     onChange={handleChange}
                     required
                 />
-                <label htmlFor="aboutMe">Tell us about yourself!</label>
+                <br />
+                <label htmlFor="profileImgUrl">Profile Image URL: </label>
                 <input 
-                    type="textarea"
+                    type="text"
+                    placeholder='Profile Image URL'
+                    name='profileImgUrl'     
+                    value={inputs.profileImgUrl}
+                    onChange={handleChange}
+                />
+                <br />
+                <label htmlFor="aboutMe">Tell us a little about yourself: </label>
+                <br />
+                <textarea 
                     name='aboutMe'     
                     value={inputs.aboutMe}
                     onChange={handleChange}
+                    className='signup--textArea'
                     required
                 />
 
                 <h3>I'm looking for...</h3>
-                <label htmlFor="agePrefFloor">Someone between the ages of</label>
+                <label htmlFor="agePrefFloor">Someone between the ages of </label>
                 <input 
                     type="number"
                     min="18"
@@ -163,7 +171,7 @@ export default function Signup() {
                     onChange={handleChange}
                     required
                 />
-                <label htmlFor="agePrefCeiling">and</label>
+                <label htmlFor="agePrefCeiling"> and </label>
                 <input 
                     type="number"
                     min="18"
@@ -175,33 +183,33 @@ export default function Signup() {
                     required
                 />
                 <br />
-                <label htmlFor='genderPref'>Who is</label>
+                <label htmlFor='genderPref'>Who is: </label>
                 <input 
                 type="checkbox"
                 value="WOMAN"
                 onChange={handleCheck}
                 />
-                <span>a Woman</span>
+                <span> a Woman</span>
                 <input 
                 type="checkbox"
                 value="MAN"
                 onChange={handleCheck}
                 />
-                <span>a Man</span>
+                <span> a Man </span>
                 <input 
                 type="checkbox"
                 value="NON-BINARY"
                 onChange={handleCheck}
                 />
 
-                <span>Non-Binary</span>
+                <span> Non-Binary </span>
                 <input 
                 type="checkbox"
                 value="OTHER"
                 onChange={handleCheck}
                 />
-                <span>Other</span>
-
+                <span> Other </span>
+                <br />
                 <button>Submit</button>
             </form>
         </div>

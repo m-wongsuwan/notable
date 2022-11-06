@@ -52,7 +52,7 @@ export default function Chat() {
     })
  // mjb broke this cahtting with mo
     function displayMessages(chatObj) {
-        if (chatObj.chatLog) {
+        if (chatObj) {
             return chatObj.chatLog.map((message, index) => {
                 return (
                     <div key={`message-${index}`} className={`chat--${message.sender === user._id ? 'user' : 'crush'}Message chat--namePlusMessage`}>

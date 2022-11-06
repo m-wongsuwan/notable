@@ -18,9 +18,12 @@ export default function Discovery() {
     function matchesGenderPref(gender) {
         return user.genderPref.indexOf(gender) > -1
     }
+    function notSelf(profileId) {
+        return profileId !== user._id
+    }
 
     const profilesMap = profiles.map(profile => {
-        if(!isTooOld(profile.birthday) && !isTooYoung(profile.birthday) && matchesGenderPref(profile.gender) )
+        if(!isTooOld(profile.birthday) && !isTooYoung(profile.birthday) && matchesGenderPref(profile.gender) && notSelf(profile._id))
         return (
                 <ProfileCard 
                     profile={profile}

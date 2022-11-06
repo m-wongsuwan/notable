@@ -18,7 +18,7 @@ export default function Home() {
             <div className="home--signupBanner" ><Link to='/signup' style={linkStyle} >Sign Up</Link></div>
             <div className="home--hero">
                 <h1>Take Note</h1>
-                <div animation>
+                <div>
                     <p className="hero--text">Your person is waiting for you, sign up now!</p>                  
                 </div>
             </div>

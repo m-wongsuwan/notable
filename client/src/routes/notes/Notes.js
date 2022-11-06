@@ -50,17 +50,29 @@ export default function Notes() {
         }
     }
 
+    const conditionalStyleObj = {
+        height: "100px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        lineHeight: "2em"
+    }
+
     return (
         <div className='notes'>
             <h1 className='pageHead'>Notes</h1>
             <div className='notes--gridContainer'>
                 <div className='notes--received'>
                     <h2>Received Notes</h2>
-                    {receivedNotes.length > 0 ? receivedNotesDisplay : noNotesMessage('received')}
+                    <div className='' style={receivedNotes.length === 0 ? conditionalStyleObj : {}}>
+                        {receivedNotes.length > 0 ? receivedNotesDisplay : noNotesMessage('received')}
+                    </div>
                 </div>
                 <div className='notes--left'>
                     <h2>Notes You Left</h2>
-                    {sentNotes.length > 0 ? sentNotesDisplay : noNotesMessage('sent')}
+                    <div className='' style={sentNotes.length === 0 ? conditionalStyleObj : {}}>
+                        {sentNotes.length > 0 ? sentNotesDisplay : noNotesMessage('sent')}
+                    </div>
                 </div>
             </div>
             

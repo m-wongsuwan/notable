@@ -112,6 +112,11 @@ export default function ProfilesProvider(props) {
         }        
     }, [token])
 
+    function usersLikeEachOther(otherUserId) {
+        const otherUser = profiles.find(profile => profile._id === otherUserId)
+        return otherUser.likedUsers.includes(user._id) && otherUser.likedBy.includes(user._id)
+    }
+
 
 
     return (
@@ -125,7 +130,8 @@ export default function ProfilesProvider(props) {
                 getAge,
                 returnGenderString,
                 returnAgeAndGenderString,
-                seekingGenderString
+                seekingGenderString,
+                usersLikeEachOther
             }}
         >
             {props.children}

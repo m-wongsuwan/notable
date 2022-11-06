@@ -17,7 +17,8 @@ export default function Profile(props) {
         // returnGenderString, 
         returnAgeAndGenderString, 
         seekingGenderString,
-        setFocusProfile
+        setFocusProfile,
+        usersLikeEachOther
     } = React.useContext(ProfilesContext)
     const { 
         leaveNote,
@@ -45,7 +46,9 @@ export default function Profile(props) {
 
     const initInputs = {noteText: ""}
     const [inputs, setInputs] = useState(initInputs)
+    const [haveMutualLike, setHaveMutualLike] = useState(usersLikeEachOther(_id))
     const leftNote = returnLeftNote(_id)
+
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -72,6 +75,10 @@ export default function Profile(props) {
         }
     }
 
+    React.useEffect(()=> {
+        setHaveMutualLike(usersLikeEachOther(_id))
+    }, [inputs])
+
     function conditionalNoteDisplay() {
         if(leftNote) {
             return (
@@ -87,6 +94,7 @@ export default function Profile(props) {
                     e.preventDefault()
                     leaveNote(inputs, _id)
                     setInputs(initInputs)
+                    setHaveMutualLike(usersLikeEachOther(_id))
                 }}>
                     <input 
                         type="text"
@@ -126,21 +134,29 @@ export default function Profile(props) {
                     <p>{seekingGenderString(genderPref)}</p>
                     
                 </div>
-                
-                {/* conditionally render reminder that you both most leave a note before chat can occur */}
-                { !props.isUserProfile && 
-                    <button onClick={()=> {
-                        if(!usersHaveChat(_id)){
-                            startChat(_id)
-                        }
-                        setFocusProfile(_id)
-                        setFocusChat(findChatWithThisUser(_id))
-                        navigate('/chat')}}
-                    >
-                        {usersHaveChat(_id) ? "Go to Chat" : "Start Chat!"}</button>
-                }
                 {props.isUserProfile && returnLogOutButton()}
             </div>
+            {!props.isUserProfile && 
+                <div className='profile' >
+                    <h3>You'll both need to leave a note on each other's profiles before you can start chatting!</h3>
+                    <button
+                            onClick={()=> {
+                                if(!usersHaveChat(_id) && usersLikeEachOther(_id)){
+                                    startChat(_id)
+                                }
+                                if (usersLikeEachOther(_id)) {
+                                    setFocusProfile(_id)
+                                    setFocusChat(findChatWithThisUser(_id))
+                                    navigate('/chat')
+                                } else {
+                                    alert("You'll need to wait for this person to like you back by leaving a note!")
+                                }
+                                }
+                            }
+                        >
+                            {usersHaveChat(_id) ? "Go to Chat" : "Start Chatting!"}</button>
+
+                </div>}
             { props.isUserProfile ? "" : conditionalNoteDisplay()}
         </>
         
