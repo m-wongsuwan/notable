@@ -2,6 +2,7 @@ const express = require('express')
 const authRouter = express.Router()
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
+const secret = process.env.SECRET || "secret phrase for local dev"
 
 authRouter.post('/signup', (req, res, next) => {
     User.findOne(
@@ -21,7 +22,7 @@ authRouter.post('/signup', (req, res, next) => {
                     res.status(500)
                     return next(err)
                 }
-                const token = jwt.sign(savedUser.withoutPassword(), process.env.SECRET)
+                const token = jwt.sign(savedUser.withoutPassword(), secret)
                 return res.status(201).send({ token, user: savedUser.withoutPassword()})
             })
         }
@@ -50,7 +51,7 @@ authRouter.post('/login', (req, res, next) => {
                     res.status(403)
                     return next(new Error('Username or Password are incorrect'))
                 }
-                const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
+                const token = jwt.sign(user.withoutPassword(), secret)
                 return res.status(200).send({ token, user: user.withoutPassword() })
             })
         }
