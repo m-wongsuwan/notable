@@ -4,3 +4,9 @@ https://www.mongodb.com/docs/manual/tutorial/query-arrays/
 
 adding to db array
 https://stackoverflow.com/questions/33049707/push-items-into-mongo-array-via-mongoose
+
+bug fixing with dan
+    secret in quotes
+    key value process.env
+    db cluster name in uri
+    process.env in server.js

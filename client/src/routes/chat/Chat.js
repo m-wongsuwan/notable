@@ -52,7 +52,7 @@ export default function Chat() {
     })
  // mjb broke this cahtting with mo
     function displayMessages(chatObj) {
-        if (chatObj) {
+        if (chatObj._id) {
             return chatObj.chatLog.map((message, index) => {
                 return (
                     <div key={`message-${index}`} className={`chat--${message.sender === user._id ? 'user' : 'crush'}Message chat--namePlusMessage`}>
@@ -91,7 +91,7 @@ export default function Chat() {
                 <div className='chat--chatBox' >
                     {profileToView.firstName ? <h2>Getting to know {capitalizeName(profileToView.firstName)}!</h2> : <h2>Who do you want to connect with?</h2>}
                     <div className='chat--messageDisplay' id='chat--messageDisplay'>
-                        {focusChat !== {} && displayMessages(focusChat)}
+                        {displayMessages(focusChat)}
                     </div>
 
                     {profileToView.firstName && <form

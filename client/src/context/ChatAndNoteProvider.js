@@ -23,7 +23,7 @@ export default function ChatAndNoteProvider(props) {
     const [sentNotes, setSentNotes] = useState([])
     const [receivedNotes, setReceivedNotes] = useState([])
     const [chats, setChats] = useState(initChats)
-    const [focusChat, setFocusChat] = React.useState([{}])
+    const [focusChat, setFocusChat] = React.useState({users: [], chatLog: [{sender: "", message: ""}],})
 
     
     function returnLeftNote(receiverId) {
