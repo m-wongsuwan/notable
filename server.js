@@ -17,7 +17,7 @@ app.use(morgan('dev'))
 //     'mongodb://localhost:27017/notable', 
 //     () => console.log('Connected to the database')
 // )
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true})
+mongoose.connect('mongodb+srv://morgan:093hnslbj@cluster0.ztao3ap.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true})
 
 app.use('/auth', require('./routes/authRouter'))
 app.use('/api', jwt({ secret: secret, algorithms: ['HS256']}))
