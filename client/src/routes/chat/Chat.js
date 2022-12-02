@@ -18,8 +18,13 @@ export default function Chat() {
         // getChats, 
         focusChat, 
         setFocusChat, 
-        sendMessage 
+        sendMessage,
+        getChats 
     } = React.useContext(ChatAndNoteContext)
+
+    React.useEffect(()=> {
+        getChats()
+    }, [ profileToView])
 
     // const name = chats.map((chat, index) => {
     //     return getName(chat.users.find(element => element !== user._id))

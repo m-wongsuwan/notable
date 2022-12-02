@@ -2,13 +2,15 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatAndNoteContext } from '../../context/ChatAndNoteProvider'
 import { ProfilesContext } from '../../context/ProfilesProvider'
+import { UserContext } from '../../context/UserProvider'
 
 export default function Notes() {
 
     let navigate = useNavigate();
 
-    const { sentNotes, receivedNotes } = React.useContext(ChatAndNoteContext)
-    const { getName, setFocusProfile } = React.useContext(ProfilesContext)
+    const { user } = React.useContext(UserContext)
+    const { sentNotes, receivedNotes, getReceivedNotes, getSentNotes } = React.useContext(ChatAndNoteContext)
+    const { getName, setFocusProfile, profileToView } = React.useContext(ProfilesContext)
 
     const sentNotesDisplay = sentNotes.map((note, index) => {
         return (
@@ -25,6 +27,14 @@ export default function Notes() {
             </div>
         )
     })
+
+    React.useEffect(()=> {
+        getReceivedNotes()
+    }, [ profileToView ])
+
+    React.useEffect(()=> {
+        getSentNotes(user._id)
+    }, [ user._id])
 
     const receivedNotesDisplay = receivedNotes.map((note, index) => {
         return (

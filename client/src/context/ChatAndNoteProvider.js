@@ -35,11 +35,7 @@ export default function ChatAndNoteProvider(props) {
             .then(res => setReceivedNotes(res.data))
             .catch(err => console.log(err))
     }
-    React.useEffect(()=> {
-        if(token) {
-            getReceivedNotes()
-        } 
-    }, [token, profileToView])
+
 
     function getChats() {
         userAxios.get('/api/chat/getchats')
@@ -48,11 +44,8 @@ export default function ChatAndNoteProvider(props) {
             })
             .catch(err => console.log(err))
     }
-    React.useEffect(()=> {
-        if(token) {
-            getChats()
-        }
-    }, [token, profileToView])
+
+
 
 
     function getSentNotes(userId) {
@@ -60,26 +53,6 @@ export default function ChatAndNoteProvider(props) {
             .then(res => setSentNotes(res.data))
             .catch(err => console.log(err))
     }
-
-    React.useEffect(()=> {
-        if(token) {
-            getSentNotes(user._id)
-        }
-    }, [token, user._id])
-
-    // i don't think i need to make an api call when we have chats state to work with
-    // function getConversation(chatId) {
-    //     userAxios.get(`/api/chat/getconversation/${chatId}`)
-    //         .then(res => setFocusChat(res.data))
-    //         .catch(err => console.log(err))
-    // }
-
-    // React.useEffect(()=> {
-    //     if(token && profileToView) {
-    //         // needs caht id not profile id
-    //         getConversation(profileToView._id)
-    //     }
-    // }, [token, profileToView])
 
     function leaveNote(noteObj, userId) {
         userAxios.post(`/api/notes/addnote/${userId}`, noteObj)
@@ -127,10 +100,13 @@ export default function ChatAndNoteProvider(props) {
                 leaveNote,
                 sentNotes,
                 setSentNotes,
+                getReceivedNotes,
+                getSentNotes,
                 receivedNotes,
                 returnLeftNote,
                 startChat,
                 chats,
+                getChats,
                 focusChat,
                 setFocusChat,
                 usersHaveChat,
@@ -144,3 +120,35 @@ export default function ChatAndNoteProvider(props) {
 
 
 }
+
+// Moved useEffects to the components where the data is used
+
+    // React.useEffect(()=> {
+    //     if(token) {
+    //         getSentNotes(user._id)
+    //     }
+    // }, [token, user._id])
+
+    // i don't think i need to make an api call when we have chats state to work with
+    // function getConversation(chatId) {
+    //     userAxios.get(`/api/chat/getconversation/${chatId}`)
+    //         .then(res => setFocusChat(res.data))
+    //         .catch(err => console.log(err))
+    // }
+
+    // React.useEffect(()=> {
+    //     if(token && profileToView) {
+    //         // needs caht id not profile id
+    //         getConversation(profileToView._id)
+    //     }
+    // }, [token, profileToView])
+        // React.useEffect(()=> {
+    //     if(token) {
+    //         getReceivedNotes()
+    //     } 
+    // }, [token, profileToView])
+    // React.useEffect(()=> {
+    //     if(token) {
+    //         getChats()
+    //     }
+    // }, [token, profileToView])
