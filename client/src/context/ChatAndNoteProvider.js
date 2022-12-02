@@ -36,7 +36,6 @@ export default function ChatAndNoteProvider(props) {
             .catch(err => console.log(err))
     }
 
-
     function getChats() {
         userAxios.get('/api/chat/getchats')
             .then(res => {
@@ -44,9 +43,6 @@ export default function ChatAndNoteProvider(props) {
             })
             .catch(err => console.log(err))
     }
-
-
-
 
     function getSentNotes(userId) {
         userAxios.get(`/api/notes/getsentnotes/${userId}`)
