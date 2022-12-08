@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { UserContext } from './UserProvider'
-import { ProfilesContext } from "./ProfilesProvider";
+// import { ProfilesContext } from "./ProfilesProvider";
 
 export const ChatAndNoteContext = React.createContext()
 
@@ -17,8 +17,8 @@ export default function ChatAndNoteProvider(props) {
 
     const initChats = [{users: [{_id: "1"}, {_id: "2"}]}]
 
-    const { user, token } = React.useContext(UserContext)
-    const { profileToView } = React.useContext(ProfilesContext)
+    const { user } = React.useContext(UserContext)
+    // const { profileToView } = React.useContext(ProfilesContext)
 
     const [sentNotes, setSentNotes] = useState([])
     const [receivedNotes, setReceivedNotes] = useState([])
@@ -68,6 +68,7 @@ export default function ChatAndNoteProvider(props) {
     }
 
     function findChatWithThisUser(userId) {
+        
         return chats.find(chat => chat.users.indexOf(userId) > -1 && chat.users.indexOf(user._id) > -1)
     }
 
@@ -93,20 +94,20 @@ export default function ChatAndNoteProvider(props) {
     return(
         <ChatAndNoteContext.Provider
             value={{
-                leaveNote,
+                leaveNote, 
                 sentNotes,
                 setSentNotes,
                 getReceivedNotes,
                 getSentNotes,
                 receivedNotes,
-                returnLeftNote,
-                startChat,
-                chats,
+                returnLeftNote, 
+                startChat, 
+                chats, 
                 getChats,
-                focusChat,
-                setFocusChat,
+                focusChat, 
+                setFocusChat, 
                 usersHaveChat,
-                sendMessage,
+                sendMessage, 
                 findChatWithThisUser
             }}
         >

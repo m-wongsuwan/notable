@@ -30,11 +30,12 @@ export default function Notes() {
 
     React.useEffect(()=> {
         getReceivedNotes()
-    }, [ profileToView ])
+    }, [ profileToView, getReceivedNotes ])
 
     React.useEffect(()=> {
         getSentNotes(user._id)
-    }, [ user._id])
+    }, [ user._id, getSentNotes])
+
 
     const receivedNotesDisplay = receivedNotes.map((note, index) => {
         return (

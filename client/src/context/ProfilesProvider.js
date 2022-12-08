@@ -126,7 +126,7 @@ export default function ProfilesProvider(props) {
                 setFocusProfile,
                 profileToView,
                 getName,
-                // this broke it???? why???
+                getProfiles,
                 getAge,
                 returnGenderString,
                 returnAgeAndGenderString,
